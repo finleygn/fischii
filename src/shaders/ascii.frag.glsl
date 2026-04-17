@@ -18,11 +18,8 @@ uniform sampler2D u_mask_texture;
 #define COLOUR_BACKGROUND vec3(0.8, 0.82, 0.85)
 #define COLOUR_FOREGROUND vec3(0.0, 0.0, 0.4)
 
-#define CELL_SIZE 14.0
+#define CELL_SIZE 12.0
 #define CHAR_WIDTH 64.0
-
-#define CHAR_WIDTH 64.0
-
 struct CellData {
     vec2 origin;
     vec2 center;
@@ -56,10 +53,10 @@ void main() {
 
 
 
-  float mask = texture(u_mask_texture, v_uv).r;
+  float mask = texture(u_mask_texture, cell.center).r;
 
   vec2 texture_position = vec2(
-    (cell.local.x + mix(-1.0, 8.0, mask)) * (CHAR_WIDTH / float(character_texture_size.x)),
+    (cell.local.x + floor(mix(-1.0, 8.0, mask))) * (CHAR_WIDTH / float(character_texture_size.x)),
     cell.local.y
   );
 
