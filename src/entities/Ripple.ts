@@ -63,7 +63,7 @@ class Ripples {
       },
       {
         ease: EaseType.EASE_OUT,
-        duration: 2,
+        duration: 1.5,
         finish: () => {
           this.instances.shift()
         },

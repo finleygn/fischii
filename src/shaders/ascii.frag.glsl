@@ -1,10 +1,5 @@
 #version 300 es
 
-// This is a full screen shader. We need to slice it into as many CELL_SIZE pixels as possible
-// Within each cell we start with taking the lumi of the center point of that cell
-// Then use that luminance to do a lookup of what character it should use
-// Then sample the right pixel of the character to render
-
 precision mediump float;
  
 in vec2 v_uv;
@@ -15,10 +10,16 @@ uniform float u_char_aspect;
 uniform sampler2D u_character_texture;
 uniform sampler2D u_mask_texture;
 
-#define COLOUR_BACKGROUND vec3(0.8, 0.82, 0.85)
-#define COLOUR_FOREGROUND vec3(0.0, 0.0, 0.4)
+#define COLOUR_BACKGROUND vec3(0.51, 0.76, 0.97)
+// #define COLOUR_FOREGROUND vec3(0.1, 0.1, 0.7)
 
-#define CELL_SIZE 12.0
+// #define COLOUR_BACKGROUND vec3(0.21, 0.47, 0.26)
+#define COLOUR_FOREGROUND vec3(0.1, 0.1, 0.7)
+
+// #define COLOUR_BACKGROUND vec3(0.0, 0.0, 1.0)
+// #define COLOUR_FOREGROUND vec3(1.0, 1.0, 1.0)
+
+#define CELL_SIZE 10.0
 #define CHAR_WIDTH 64.0
 struct CellData {
     vec2 origin;
@@ -51,12 +52,10 @@ void main() {
   CellData cell = cell_create(v_uv);
   ivec2 character_texture_size = textureSize(u_character_texture, 0);
 
-
-
   float mask = texture(u_mask_texture, cell.center).r;
 
   vec2 texture_position = vec2(
-    (cell.local.x + floor(mix(-1.0, 8.0, mask))) * (CHAR_WIDTH / float(character_texture_size.x)),
+    (cell.local.x + mix(-1.0, 8.0, mask)) * (CHAR_WIDTH / float(character_texture_size.x)),
     cell.local.y
   );
 

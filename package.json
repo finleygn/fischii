@@ -13,6 +13,6 @@
     "vite": "^8.0.4"
   },
   "dependencies": {
-    "@fishley/wwwgraphics": "npm:@jsr/fishley__wwwgraphics"
+    "@fishley/wwwgraphics": "npm:@jsr/fishley__wwwgraphics@0.2.16"
   }
 }

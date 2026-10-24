@@ -15,7 +15,6 @@ class GlobalContext {
 
   public update(dt: number) {
     this.setProjectionMatrix(this.canvas.clientWidth, this.canvas.clientHeight);
-
     this.animationEngine.tick(dt);
   }
 

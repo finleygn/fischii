@@ -19,7 +19,7 @@ float ring(
   float currentThickness = baseThickness;
   float diff = abs(dist - radius);
 
-  float edgeSoftness = 0.01; 
+  float edgeSoftness = 0.03; 
   float ringShape = smoothstep(currentThickness + edgeSoftness, currentThickness, diff);
   float fade = smoothstep(1.0, 0.7, localProgress);
 
